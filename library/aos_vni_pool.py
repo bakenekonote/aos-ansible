@@ -105,7 +105,7 @@ value:
 '''
 
 from ansible.module_utils.basic import AnsibleModule
-from library.aos import aos_post, aos_put, aos_delete, find_resource_item
+from ansible.module_utils.aos import aos_post, aos_put, aos_delete, find_resource_item
 
 ENDPOINT = 'resources/vni-pools'
 

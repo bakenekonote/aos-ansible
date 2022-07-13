@@ -108,7 +108,7 @@ value:
 
 
 from ansible.module_utils.basic import AnsibleModule
-from library.aos import aos_get, aos_post, aos_put, aos_delete, validate_vni_id, \
+from ansible.module_utils.aos import aos_get, aos_post, aos_put, aos_delete, validate_vni_id, \
     validate_vlan_id
 
 ENDPOINT = 'security-zones'

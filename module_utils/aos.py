@@ -158,7 +158,9 @@ def find_bp_system_nodes(session, blueprint_id, nodes=None):
     :return: list
     """
     endpoint = "blueprints/{}/ql".format(blueprint_id)
-    device_query = {'query': "{ system_nodes{id, label, role} }"}
+    device_query = {
+        "query": "{ redundancy_group_nodes{id, label}, system_nodes{id, label}}"
+    }
 
     node_data = aos_post(session, endpoint, device_query)
 
@@ -166,6 +168,9 @@ def find_bp_system_nodes(session, blueprint_id, nodes=None):
 
     if nodes:
         for n in node_data['data']['system_nodes']:
+            if n['label'] in nodes:
+                resp_nodes.append(n)
+        for n in node_data['data']['redundancy_group_nodes']:
             if n['label'] in nodes:
                 resp_nodes.append(n)
 

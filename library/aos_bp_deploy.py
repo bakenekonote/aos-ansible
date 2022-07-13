@@ -55,7 +55,7 @@ blueprint_id:
 
 
 from ansible.module_utils.basic import AnsibleModule
-from library.aos import aos_get, aos_put
+from ansible.module_utils.aos import aos_get, aos_put
 
 ENDPOINT = 'blueprints'
 

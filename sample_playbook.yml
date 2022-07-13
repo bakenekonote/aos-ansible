@@ -1,0 +1,40 @@
+---
+- name: add VN to Apstra
+  connection: local
+  hosts: localhost
+  gather_facts: false
+  environment:
+        AOS_VERIFY_CERTIFICATE: False
+  tasks:
+    - name: Create a session with the AOS-server
+      aos_login:
+        server: 127.0.0.1
+        user: admin
+        passwd: admin
+    - name: Use the newly created session (register is not mandatory)
+      aos_ip_pool:
+        session: "{{ aos_session }}"
+        name: my_ip_pool
+        subnets:
+          - 123.1.1.0/24
+          - 123.2.2.0/24
+          - 123.3.3.0/24
+          - 123.4.4.0/24
+        ip_version: ipv4
+        state: present
+
+    - name: create VN
+      aos_bp_virtual_networks:
+        session: "{{ aos_session }}"
+        name: test_vn2
+        blueprint_id: f9494b44-7d1f-4318-aeb6-167aa051dc1b
+        vn_id: 23458
+        vn_type: vxlan
+        sec_zone_id: 6QSfmcegU7iBJ_J4kPA
+        bound_to_name:
+          - l2_esi_001_leaf_pair1
+        ipv4_enabled: true
+        ipv4_subnet: 123.3.1.0/24
+        virtual_gw_ipv4: 123.3.1.254
+        dhcp_service: false
+        state: present

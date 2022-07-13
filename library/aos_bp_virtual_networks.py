@@ -175,7 +175,7 @@ value:
 
 
 from ansible.module_utils.basic import AnsibleModule
-from library.aos import aos_get, aos_post, aos_put, aos_delete, validate_vlan_id, \
+from ansible.module_utils.aos import aos_get, aos_post, aos_put, aos_delete, validate_vlan_id, \
     validate_vni_id, validate_ip_format, find_bp_system_nodes
 
 
